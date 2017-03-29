@@ -1,2 +1,3 @@
+# linter
 module UsersHelper
 end
