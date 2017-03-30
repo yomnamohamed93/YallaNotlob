@@ -6,6 +6,12 @@ git_source(:github) do |repo_name|
 end
 # paper clip for file upload
 gem 'paperclip', git: 'git://github.com/thoughtbot/paperclip.git'
+# Bootstrap gem
+gem 'bootstrap', '~> 4.0.0.alpha6'
+# Tether
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.3.3'
+end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
 # Use postgresql as the database for Active Record
