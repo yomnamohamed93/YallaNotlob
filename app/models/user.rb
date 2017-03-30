@@ -1,5 +1,6 @@
 # Just to silence the linter
 class User < ApplicationRecord
+  has_many :groups
   has_friendship
   has_attached_file :avatar,
                     styles: { medium: '300x300>', thumb: '100x100>' },
