@@ -13,14 +13,14 @@
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
+  
       <tr>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.password %></td>
-        <td><%= image_tag user.avatar.url(:thumb) %><td>
+        <td><%= current_user.name %></td>
+        <td><%= current_user.email %></td>
+        <td><%= current_user.password %></td>
+        <td><%= image_tag current_user.avatar.url(:thumb) %><td>
       </tr>
-    <% end %>
+
   </tbody>
 </table>
 

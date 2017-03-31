@@ -4,26 +4,26 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @user = User.find(current_user)
+    @user = current_user
     @groups = @user.groups
   end
 
   def show; end
 
   def new
-    @user = User.find(params[:user_id])
+    @user = current_user
     @group = @user.groups.new
   end
 
   def edit; end
 
   def create
-    @user = User.find(params[:user_id])
+    @user = current_user
     @group = @user.groups.new(group_params)
 
     respond_to do |format|
       if @group.save
-        format.html { redirect_to [@user, @group], notice: 'Group created.' }
+        format.html { redirect_to [@group], notice: 'Group created.' }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
@@ -33,11 +33,11 @@ class GroupsController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:user_id])
+    @user = current_user
     @group = @user.groups.find(params[:id])
     respond_to do |format|
       if @group.update(group_params)
-        format.html { redirect_to [@user, @group], notice: 'Group updated.' }
+        format.html { redirect_to [@group], notice: 'Group updated.' }
         format.json { render :show, status: :ok, location: @group }
       else
         format.html { render :edit }
@@ -49,7 +49,7 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     respond_to do |format|
-      format.html { redirect_to user_groups_url, notice: 'Group was successfully destroyed.' }
+      format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -58,7 +58,7 @@ class GroupsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_group
-    @user = User.find(params[:user_id])
+    @user = current_user
     @group = @user.groups.find(params[:id])
   end
 
