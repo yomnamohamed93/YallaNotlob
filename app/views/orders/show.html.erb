@@ -1,29 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Order type:</strong>
-  <%= @order.order_type %>
-</p>
+<table>
+  <tr>
+    <th colspan="2">Name</th>
+    <th colspan="2">Menu</th>
+  </tr>
+  <tr>
+    <td colspan="2"><%= @order.user.name %></td>
+    <td><%= @order.id %></td>
+    <td colspan="2"><%= image_tag @order.menu_img.url(:thumb) %></td>
+  </tr>
+</table>
 
-<p>
-  <strong>Resturant name:</strong>
-  <%= @order.resturant_name %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @order.user %>
-</p>
-<p>
-    <strong>Menu:</strong>
-  <%= image_tag @order.menu_img.url(:medium) %>
-</p>
 <h2>Order details</h2>
 <table>
   <% @order.order_details.each do |order_detail| %>
     <tr>
-      <td><%= order_detail.user %></td>
-      <td><%= order_detail.order %></td>
+      <td><%= order_detail.user.id %></td>
+      <td><%= current_user.name %></td>
       <td><%= order_detail.item %></td>
       <td><%= order_detail.amount %></td>
       <td><%= order_detail.price %></td>
@@ -37,39 +31,24 @@
 
 <h2>Add a detail:</h2>
 <%= form_for([@order.order_details.build]) do |f| %>
-<div class="field">
-  <%= f.label :user_id %>
-  <%= f.text_field :user_id %>
-</div>
+<%= f.hidden_field :user_id, value:current_user.id %>
+<%= f.hidden_field  :order_id %>
+<table>
+  <tr>
+    <th> <%= f.label :item %></th>
+    <th> <%= f.label :amount %></th>
+    <th> <%= f.label :price %></th>
+    <th> <%= f.label :comment %></th>
+  </tr>
+  <tr>
+    <td><%= f.text_field :item %></td>
+    <td><%= f.number_field :amount %></td>
+    <td><%= f.text_field :price %></td>
+    <td><%= f.text_area :comment %></td>
+    <td>  <%= f.submit %></td>
+  </tr>
+</table>
 
-<div class="field">
-  <%= f.label :order_id %>
-  <%= f.text_field :order_id %>
-</div>
-
-<div class="field">
-  <%= f.label :item %>
-  <%= f.text_field :item %>
-</div>
-
-<div class="field">
-  <%= f.label :amount %>
-  <%= f.number_field :amount %>
-</div>
-
-<div class="field">
-  <%= f.label :price %>
-  <%= f.text_field :price %>
-</div>
-
-<div class="field">
-  <%= f.label :comment %>
-  <%= f.text_area :comment %>
-</div>
-
-<div class="actions">
-  <%= f.submit %>
-</div>
 <% end %>
 
 

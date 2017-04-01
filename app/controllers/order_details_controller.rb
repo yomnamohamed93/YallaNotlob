@@ -25,10 +25,9 @@ class OrderDetailsController < ApplicationController
   # POST /order_details.json
   def create
     @order_detail = OrderDetail.new(order_detail_params)
-
     respond_to do |format|
       if @order_detail.save
-        format.html { redirect_to @order_detail, notice: 'Order detail was successfully created.' }
+        format.html { redirect_to @order_detail.order, notice: 'Order detail created.' }
         format.json { render :show, status: :created, location: @order_detail }
       else
         format.html { render :new }
