@@ -6,7 +6,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :groups
   has_many :orders
-  has_and_belongs_to_many :participated_groups, class_name: 'groups',
+  has_many :participated_orders, through: :order_details,
+                                 class_name: 'Order',
+                                 foreign_key: 'order_id'
+  has_and_belongs_to_many :participated_groups, class_name: 'Group',
                                                 foreign_key: 'group_id'
   has_friendship
   has_attached_file :avatar,

@@ -18,7 +18,59 @@
     <strong>Menu:</strong>
   <%= image_tag @order.menu_img.url(:medium) %>
 </p>
+<h2>Order details</h2>
+<table>
+  <% @order.order_details.each do |order_detail| %>
+    <tr>
+      <td><%= order_detail.user %></td>
+      <td><%= order_detail.order %></td>
+      <td><%= order_detail.item %></td>
+      <td><%= order_detail.amount %></td>
+      <td><%= order_detail.price %></td>
+      <td><%= order_detail.comment %></td>
+      <td><%= link_to 'Show', order_detail %></td>
+      <td><%= link_to 'Edit', edit_order_detail_path(order_detail) %></td>
+      <td><%= link_to 'Destroy', order_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
 
+<h2>Add a detail:</h2>
+<%= form_for([@order.order_details.build]) do |f| %>
+<div class="field">
+  <%= f.label :user_id %>
+  <%= f.text_field :user_id %>
+</div>
+
+<div class="field">
+  <%= f.label :order_id %>
+  <%= f.text_field :order_id %>
+</div>
+
+<div class="field">
+  <%= f.label :item %>
+  <%= f.text_field :item %>
+</div>
+
+<div class="field">
+  <%= f.label :amount %>
+  <%= f.number_field :amount %>
+</div>
+
+<div class="field">
+  <%= f.label :price %>
+  <%= f.text_field :price %>
+</div>
+
+<div class="field">
+  <%= f.label :comment %>
+  <%= f.text_area :comment %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>
 
 
 <%= link_to 'Edit', edit_order_path(@order) %> |

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401175858) do
+ActiveRecord::Schema.define(version: 20170401184757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,19 @@ ActiveRecord::Schema.define(version: 20170401175858) do
     t.integer "user_id"
     t.index ["group_id"], name: "index_groups_members_on_group_id", using: :btree
     t.index ["user_id"], name: "index_groups_members_on_user_id", using: :btree
+  end
+
+  create_table "order_details", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "order_id"
+    t.string   "item"
+    t.integer  "amount"
+    t.float    "price"
+    t.text     "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_details_on_order_id", using: :btree
+    t.index ["user_id"], name: "index_order_details_on_user_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
@@ -79,5 +92,7 @@ ActiveRecord::Schema.define(version: 20170401175858) do
   add_foreign_key "groups", "users"
   add_foreign_key "groups_members", "groups"
   add_foreign_key "groups_members", "users"
+  add_foreign_key "order_details", "orders"
+  add_foreign_key "order_details", "users"
   add_foreign_key "orders", "users"
 end
