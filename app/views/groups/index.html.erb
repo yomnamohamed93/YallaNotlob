@@ -1,7 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Groups</h1>
+<h2>Add Group:</h2>
+<%= form_for([@user.groups.build]) do |f| %>
+<%= f.hidden_field :user_id, value:current_user.id %>
+<table>
+  <tr>
+    <th> <%= f.label :name %></th>
+  </tr>
+  <tr>
+    <td><%= f.text_field :name %></td>
+    <td>  <%= f.submit %></td>
+  </tr>
+</table>
 
+<% end %>
+
+
+<h1>My Groups</h1>
 <table>
   <thead>
     <tr>
@@ -16,9 +31,8 @@
       <tr>
         <td><%= group.name %></td>
         <td><%= group.user %></td>
-        <td><%= link_to 'Show', [group] %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', [ group], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', group %></td>
+        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +40,4 @@
 
 <br>
 
-<%= link_to 'New Group', new_group_path %>
+<!-- <%= link_to 'New Group', new_group_path %> -->
