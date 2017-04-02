@@ -9,8 +9,8 @@
   </head>
 
   <body>
-    <h1><a href="/">Yalla Notlob</a></h1>
     <% if user_signed_in?%>
+    <h1><a href="/">Yalla Notlob</a></h1>
     <div class="btn-group" role="group" aria-label="...">
       <%= link_to 'Home', "/", method: :get ,class: :"btn btn-default"%> |
       <%= link_to 'Friends', friends_path, method: :get ,class: :"btn btn-default"%> |
