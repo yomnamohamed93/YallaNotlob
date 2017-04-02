@@ -29,7 +29,7 @@ a {
 
   &:hover {
     color: #fff;
-    background-color: #000;
+
   }
 }
 
@@ -82,6 +82,11 @@ div {
     font-size: 12px;
     list-style: square;
   }
+}
+
+#logout
+{
+  float: right;
 }
 
 label {

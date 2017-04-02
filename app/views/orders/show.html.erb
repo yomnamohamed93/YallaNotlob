@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<table>
+<table class="table table-striped table-bordered">
   <tr>
     <th colspan="2">Name</th>
     <th colspan="2">Menu</th>
@@ -13,8 +13,17 @@
 </table>
 
 <h2>Order details</h2>
-<table>
+<table class="table table-striped table-bordered">
   <% @order.order_details.each do |order_detail| %>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Item</th>
+      <th>Amout</th>
+      <th>Price</th>
+      <th>Comment</th>
+      <th colspan="3">Action</th>
+    </tr>
     <tr>
       <td><%= order_detail.user.id %></td>
       <td><%= current_user.name %></td>
@@ -33,7 +42,7 @@
 <%= form_for([@order.order_details.build]) do |f| %>
 <%= f.hidden_field :user_id, value:current_user.id %>
 <%= f.hidden_field  :order_id %>
-<table>
+<table class="table table-striped table-bordered">
   <tr>
     <th> <%= f.label :item %></th>
     <th> <%= f.label :amount %></th>

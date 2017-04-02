@@ -1,5 +1,5 @@
 <div id="box" class="center">
-  <h1>Yalla Notlob</h1>
+  <h2>Yalla Notlob</h2>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
       <%= f.label :email %><br />
@@ -23,7 +23,5 @@
     </div>
   <% end %>
 
-  <!-- <%= link_to "Sign up now!", '#', class: "btn btn-lg btn-primary" %> -->
+  <%= render "devise/shared/links" %>
 </div>
-
-<%= render "devise/shared/links" %>

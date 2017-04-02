@@ -9,13 +9,16 @@
   </head>
 
   <body>
+    <h1><a href="/">Yalla Notlob</a></h1>
     <% if user_signed_in?%>
     <div class="btn-group" role="group" aria-label="...">
       <%= link_to 'Home', "/", method: :get ,class: :"btn btn-default"%> |
       <%= link_to 'Friends', friends_path, method: :get ,class: :"btn btn-default"%> |
       <%= link_to 'Groups', groups_path, method: :get ,class: :"btn btn-default"%> |
       <%= link_to 'Orders', orders_path, method: :get ,class: :"btn btn-default"%> |
-      <%= link_to 'Logout', destroy_user_session_path, method: :delete ,class: :"btn btn-default"%> |
+    </div>
+    <div class="btn-group" role="group" aria-label="..." id="logout">
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete ,class: :"btn btn-default"%>
     </div>
     <% end %>
     <p class="notice"><%= notice %></p>
