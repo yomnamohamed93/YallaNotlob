@@ -1,27 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Users</h1>
+<h1>Last Orders</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Password</th>
-      <th>Avatar</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-  
+<table>
+  <tr>
+    <% @orders.each do |order| %>
       <tr>
-        <td><%= current_user.name %></td>
-        <td><%= current_user.email %></td>
-        <td><%= current_user.password %></td>
-        <td><%= image_tag current_user.avatar.url(:thumb) %><td>
+        <td><%= link_to "#{order.order_type} on #{order.created_at}" , order_path(@orders) %></td>
       </tr>
-
-  </tbody>
+    <% end %>
+  </tr>
 </table>
-
 <br>
