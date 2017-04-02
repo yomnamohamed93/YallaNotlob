@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<h4>Add a Friend:</h4>
+<%= form_tag("/friends", method: :post) do %>
+  <table>
+    <tr>
+      <td><%= label_tag(:friend_email, "Add Friend: ")%></td>
+      <td><%= text_field_tag(:friend_email) %></td>
+      <td><%= submit_tag(:Add) %></td>
+    </tr>
+  </table>
+<% end %>
+<h1>Friends</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Avatar</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @friends.each do |friend| %>
+      <tr>
+        <td><%= link_to "#{friend.name}", "friend#show" %></td>
+        <td><%= image_tag friend.avatar.url(:thumb) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h1>Friend Requests</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Avatar</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @requests.each do |friend| %>
+      <tr>
+        <td><%= link_to "#{friend.name}", "friend#show" %></td>
+        <td><%= image_tag friend.avatar.url(:thumb) %></td>
+        <td><%= link_to 'Accept', "/friends/#{friend.id}/accept", method: :put, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Reject', "/friends/#{friend.id}/decline", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>

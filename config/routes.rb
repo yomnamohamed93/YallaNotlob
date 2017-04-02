@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :order_details
   resources :orders
+  get 'friends', :to => 'friends#index'
+  post 'friends', :to => 'friends#create'
+  put "friends/:id/accept", :to => 'friends#accept'
+  delete "friends/:id/decline", :to => 'friends#decline'
   devise_for :users
   # resources :users
   root 'users#index'
