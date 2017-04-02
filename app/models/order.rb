@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user
-  has_many :order_details
+  has_many :order_details, dependent: :destroy
   has_many :participated_users, through: :order_details,
                                 class_name: 'User',
                                 foreign_key: 'user_id'

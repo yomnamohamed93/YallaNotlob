@@ -6,11 +6,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :groups
   has_many :orders
+  has_many :order_details, dependent: :destroy
   has_many :participated_orders, through: :order_details,
                                  class_name: 'Order',
                                  foreign_key: 'order_id'
   has_and_belongs_to_many :participated_groups, class_name: 'Group',
-                                                foreign_key: 'group_id'
+                                                foreign_key: 'group_id',
+                                                join_table: :groups_members
   has_friendship
   has_attached_file :avatar,
                     styles: { medium: '300x300>', thumb: '100x100>' },
