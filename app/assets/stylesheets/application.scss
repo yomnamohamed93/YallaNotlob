@@ -14,3 +14,31 @@
  *= require_self
  */
 @import 'bootstrap';
+
+body {
+  padding-top: 60px;
+    border: 2px solid gray;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+#box {
+  padding: 10px;
+  width: 30%;
+  height: 400px;
+  margin: 2px auto;
+}
