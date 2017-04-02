@@ -22,8 +22,9 @@
   <tbody>
     <% @friends.each do |friend| %>
       <tr>
-        <td><%= link_to "#{friend.name}", "friend#show" %></td>
+        <td><%= link_to "#{friend.name}", "friends/#{friend.id}/show" %></td>
         <td><%= image_tag friend.avatar.url(:thumb) %></td>
+        <td><%= link_to 'Remove', "/friends/#{friend.id}/remove", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

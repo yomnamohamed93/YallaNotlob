@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post 'friends', :to => 'friends#create'
   put "friends/:id/accept", :to => 'friends#accept'
   delete "friends/:id/decline", :to => 'friends#decline'
+  get "friends/:id/show", :to => 'friends#show'
+  delete "friends/:id/remove", :to => 'friends#remove'
   devise_for :users
   # resources :users
   root 'users#index'

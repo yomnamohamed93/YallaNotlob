@@ -2,23 +2,17 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @user.name %>
+  <%= @friend.name %>
 </p>
 
 <p>
   <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
+  <%= @friend.email %>
 </p>
 
 <p>
   <strong>Avatar:</strong>
-  <%= image_tag @user.avatar.url(:thumb) %>
+  <%= image_tag @friend.avatar.url(:thumb) %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', '/friends' %>

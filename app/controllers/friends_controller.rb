@@ -20,6 +20,13 @@ class FriendsController < ApplicationController
   end
 
   def remove
+    @friend = User.find(params[:id])
+    current_user.remove_friend @friend
+    redirect_to '/friends'
+  end
+
+  def show
+    @friend = User.find(params[:id])
   end
 
   def create
