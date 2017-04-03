@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete "friends/:id/decline", :to => 'friends#decline'
   get "friends/:id/show", :to => 'friends#show'
   delete "friends/:id/remove", :to => 'friends#remove'
-  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
+  devise_for :users
   # resources :users
   root 'users#index'
   resources :groups

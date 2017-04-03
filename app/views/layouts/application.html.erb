@@ -18,7 +18,6 @@
       <%= link_to 'Orders', orders_path, method: :get ,class: :"btn btn-default"%> |
     </div>
     <div class="btn-group" role="group" aria-label="..." id="logout">
-      <%= link_to "#{current_user.name}"%>
       <%= link_to 'Logout', destroy_user_session_path, method: :delete ,class: :"btn btn-default"%>
     </div>
     <% end %>
