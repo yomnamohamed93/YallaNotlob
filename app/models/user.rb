@@ -14,7 +14,7 @@ class User < ApplicationRecord
                                                 foreign_key: 'user_id',
                                                 join_table: :groups_members
   has_and_belongs_to_many :invited_orders, class_name: 'Order',
-                                           foreign_key: 'order_id',
+                                           foreign_key: 'user_id',
                                            join_table: :invitees_orders
   has_friendship
   has_attached_file :avatar,

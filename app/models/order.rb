@@ -6,7 +6,7 @@ class Order < ApplicationRecord
                                 class_name: 'User',
                                 foreign_key: 'user_id'
   has_and_belongs_to_many :invited_users, class_name: 'User',
-                                          foreign_key: 'user_id',
+                                          foreign_key: 'order_id',
                                           join_table: :invitees_orders
   has_attached_file :menu_img,
                     styles: { medium: '300x300>', thumb: '100x100>' },
