@@ -14,29 +14,56 @@
 </table>
 
 <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading center">
+          My Groups
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="center">Name</th>
+                <th class="center" colspan="2">Actions</th>
+              </tr>
+            </thead>
 
+            <tbody>
+              <% @groups.each do |group| %>
+                <tr>
+                  <td><%= link_to "#{group.name }", "/groups/members/#{group.id}" ,remote: true %></td>
+                  <td><%= link_to 'Show', group %></td>
+                  <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="panel panel-default">
+        <div class="panel-heading center">
+        </div>
+        <div class="panel-body">
+          <%= form_tag("/groups/add_member", method: :post, remote: true) do %>
+            <table>
+              <tr>
+                <td><%= label_tag(:friend_email, "Add Friend to group: ")%></td>
+                <td><%= hidden_field_tag :group_id%></td>
+                <td><%= text_field_tag :friend_email%></td>
+                <td><%= submit_tag :Add %></td>
+              </tr>
+            </table>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<h1>My Groups</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @groups.each do |group| %>
-      <tr>
-        <td><%= group.name %></td>
-        <td><%= group.user %></td>
-        <td><%= link_to 'Show', group %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+</div>
 
 <br>
 

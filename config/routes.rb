@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   resources :order_details
   resources :orders
-  get 'friends', :to => 'friends#index'
-  post 'friends', :to => 'friends#create'
-  put "friends/:id/accept", :to => 'friends#accept'
-  delete "friends/:id/decline", :to => 'friends#decline'
-  get "friends/:id/show", :to => 'friends#show'
-  delete "friends/:id/remove", :to => 'friends#remove'
+  get 'groups/members/:id', to: 'groups#members'
+  post 'groups/add_member', to: 'groups#add_member'
+  get 'friends', to: 'friends#index'
+  post 'friends', to: 'friends#create'
+  put 'friends/:id/accept', to: 'friends#accept'
+  delete 'friends/:id/decline', to: 'friends#decline'
+  get 'friends/:id/show', to: 'friends#show'
+  delete 'friends/:id/remove', to: 'friends#remove'
   devise_for :users
   # resources :users
   root 'users#index'

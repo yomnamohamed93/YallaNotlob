@@ -53,6 +53,36 @@ class GroupsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def members
+    @group = Group.find params[:id]
+    @members = @group.members
+    respond_to do |format|
+      # format.html # show.html.erb
+      format.json { render json: @members }
+    end
+  end
+
+  def add_member
+    begin
+      @member = current_user.friends.where(email: params[:friend_email]).first
+      @group = Group.find params[:group_id]
+      begin
+        @group.members.find @member.id
+      rescue
+        @group.members << @member
+      end
+      respond_to do |format|
+        # format.html # show.html.erb
+        format.json { render json: @member }
+      end
+    rescue
+      respond_to do |format|
+        # format.html # show.html.erb
+        format.json { render json: "Not found" }
+      end
+    end
+
+  end
 
   private
 
@@ -64,6 +94,9 @@ class GroupsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def group_params
+    params.require(:group).permit(:name, :user_id)
+  end
+  def member_params
     params.require(:group).permit(:name, :user_id)
   end
 end
