@@ -3,11 +3,35 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 `
 $(function(){
-    $("a[data-remote='true']").on('click', function(event){
-      clickedLink = $(event.target);
-      hrefArray = clickedLink.attr('href').split('/');
-      G_id = parseInt(hrefArray[hrefArray.length -1]);
+    $("#g_name").on('click', function(event){
+      clickedLable = $(event.target);
+      clickedLable.css('background-color',"#ccc")
+      G_id = parseInt(clickedLable.attr('val'));
       $("#group_id").val(G_id);
-    })
+
+    $.ajax({
+                 url: "groups/members", // Route to the Script Controller method
+                type: "POST",
+            dataType: "json",
+                data: { group_ID: G_id }, // This goes to Controller in params hash,
+            complete: function() {},
+             success: function(data, textStatus, xhr) {
+                        console.log(data);
+                      $("#tst").text("");
+                      data.forEach(function(entry) {
+                      console.log(entry.name);
+                    // $("#tst").text(entry.name);
+                      var txt2 = $("<li></li>").text(entry.name);
+                      $("#tst").append(txt2);
+
+                  });
+                      },
+               error: function() {
+                        alert("Ajax error!")
+                      }
+    });
+    });
 });
+
+
 `

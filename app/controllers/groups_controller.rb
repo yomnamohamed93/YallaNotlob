@@ -8,7 +8,11 @@ class GroupsController < ApplicationController
     @groups = @user.groups
   end
 
-  def show; end
+  def show
+    @user = current_user
+    @groups = Group.find params[:id]
+    @membersG= @group.members
+   end
 
   def new
     @user = current_user
@@ -54,11 +58,18 @@ class GroupsController < ApplicationController
     end
   end
   def members
-    @group = Group.find params[:id]
+    @group = Group.find params[:group_ID]
+    # @group = Group.where(:group_group_ID => params[:group_ID]).first # file_name is the data key of Ajax request in view
     @members = @group.members
+  #  if request.xhr?
+   #
+  #      render :json => {
+  #                          :g_members => @group.members
+  #                      }
+  #   end
     respond_to do |format|
       # format.html # show.html.erb
-      format.json { render json: @members }
+      format.json { render json: @members.to_json }
     end
   end
 
