@@ -26,15 +26,27 @@ class OrdersController < ApplicationController
   def create
     @order = current_user.orders.new(order_params)
     # @member = current_user.friends.where(id: params[:f.id]).first
-    # current_order_id=("#{Order.last.id+1}").to_i
 
     # respond_to do |format|
       if @order.save
-        # respond_to do |format|
-        #   format.json { render json: @order }
-        # end
-    #     @order_n = Order.find params[:current_order_id]
-    #     @order_n.invited_users << @member
+
+        params[:invited_users].each do |u_id|
+          @member = current_user.friends.find u_id.to_i
+          @order.invited_users << @member
+        end
+        params[:invited_groups].each do |g_id|
+          @group = current_user.groups.find g_id.to_i
+          @group.members.each do |group_member|
+            begin
+              @order.invited_users.find group_member
+            rescue
+              @order.invited_users << group_member
+            end
+          end
+        end
+        respond_to do |format|
+          format.json { render json: @order.invited_users }
+        end
         # format.html { redirect_to @order, notice: 'Order was successfully created.' }
         # format.json { render :show, status: :created, location: @order }
     #   else
