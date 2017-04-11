@@ -5,6 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :groups
+  has_many :notifications
   has_many :orders
   has_many :order_details, dependent: :destroy
   has_many :participated_orders, through: :order_details,

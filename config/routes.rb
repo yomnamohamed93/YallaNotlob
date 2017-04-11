@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'notifications/index'
   resources :order_details
   resources :orders
   post 'groups/members', to: 'groups#members'

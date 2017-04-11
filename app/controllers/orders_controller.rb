@@ -29,23 +29,32 @@ class OrdersController < ApplicationController
 
     # respond_to do |format|
       if @order.save
-
-        params[:invited_users].each do |u_id|
-          @member = current_user.friends.find u_id.to_i
-          @order.invited_users << @member
-        end
-        params[:invited_groups].each do |g_id|
-          @group = current_user.groups.find g_id.to_i
-          @group.members.each do |group_member|
-            begin
-              @order.invited_users.find group_member
-            rescue
-              @order.invited_users << group_member
+        begin
+          params[:invited_users].each do |u_id|
+            @member = current_user.friends.find u_id.to_i
+            @order.invited_users << @member
+            notif_body = current_user.name << ' invited you to order ' << @order.id
+            @member.notifications.create(user_id: @member.id, event: notif_body)
+          end
+        rescue
+          begin
+            params[:invited_groups].each do |g_id|
+              @group = current_user.groups.find g_id.to_i
+              @group.members.each do |group_member|
+                begin
+                  @order.invited_users.find group_member
+                rescue
+                  @order.invited_users << group_member
+                end
+              end
             end
+          rescue
+
           end
         end
         respond_to do |format|
-          format.json { render json: @order.invited_users }
+          format.html { redirect_to @order, notice: 'Order was successfully created.' }
+          # format.json { render json: @order.invited_users }
         end
         # format.html { redirect_to @order, notice: 'Order was successfully created.' }
         # format.json { render :show, status: :created, location: @order }

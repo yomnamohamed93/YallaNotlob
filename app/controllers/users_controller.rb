@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def index
      @user = current_user
      @orders = @user.orders.sort
+     @notifications = current_user.notifications.reverse
   end
 
   # GET /users/1
