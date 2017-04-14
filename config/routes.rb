@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   get 'notifications/index'
-  # Websockets resemble this URL
-  mount ActionCable.server => '/cable'
   resources :order_details
   resources :orders
   post 'groups/members', to: 'groups#members'
