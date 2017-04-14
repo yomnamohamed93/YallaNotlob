@@ -28,40 +28,44 @@ class OrdersController < ApplicationController
     # @member = current_user.friends.where(id: params[:f.id]).first
 
     # respond_to do |format|
-      if @order.save
+    if @order.save
+      begin
+        params[:invited_users].each do |u_id|
+          @member = current_user.friends.find u_id.to_i
+          @order.invited_users << @member
+          notif_body = current_user.name << ' invited you to order ' << @order.order_type
+          link_body = "/orders/#{@order.id}"
+          @member.notifications.create(user_id: @member.id, event: notif_body, link: link_body)
+        end
+      rescue
         begin
-          params[:invited_users].each do |u_id|
-            @member = current_user.friends.find u_id.to_i
-            @order.invited_users << @member
-            notif_body = current_user.name << ' invited you to order ' << @order.id
-            @member.notifications.create(user_id: @member.id, event: notif_body)
-          end
-        rescue
-          begin
-            params[:invited_groups].each do |g_id|
-              @group = current_user.groups.find g_id.to_i
-              @group.members.each do |group_member|
-                begin
-                  @order.invited_users.find group_member
-                rescue
-                  @order.invited_users << group_member
-                end
+          params[:invited_groups].each do |g_id|
+            @group = current_user.groups.find g_id.to_i
+            @group.members.each do |group_member|
+              begin
+                @order.invited_users.find group_member
+              rescue
+                @order.invited_users << group_member
+                notif_body = current_user.name << ' invited you to order ' << @order.order_type
+                link_body = "/orders/#{@order.id}"
+                group_member.notifications.create(user_id: group_member.id, event: notif_body, link: link_body)
               end
             end
-          rescue
-
           end
+        rescue
+
         end
-        respond_to do |format|
-          format.html { redirect_to @order, notice: 'Order was successfully created.' }
-          # format.json { render json: @order.invited_users }
-        end
-        # format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        # format.json { render :show, status: :created, location: @order }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @order.errors, status: :unprocessable_entity }
       end
+      respond_to do |format|
+        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        # format.json { render json: @order.invited_users }
+      end
+      # format.html { redirect_to @order, notice: 'Order was successfully created.' }
+      # format.json { render :show, status: :created, location: @order }
+      #   else
+      #     format.html { render :new }
+      #     format.json { render json: @order.errors, status: :unprocessable_entity }
+    end
     # end
   end
 
@@ -112,13 +116,13 @@ class OrdersController < ApplicationController
 
   end
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_params
-      params.require(:order).permit(:order_type, :resturant_name, :user_id, :menu_img)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def order_params
+    params.require(:order).permit(:order_type, :resturant_name, :user_id, :menu_img)
+  end
 end
