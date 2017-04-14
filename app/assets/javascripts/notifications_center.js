@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load',function()
+$(document).ready(function()
 {
     // open notification center on click
     $("#open_notification").click(function()
