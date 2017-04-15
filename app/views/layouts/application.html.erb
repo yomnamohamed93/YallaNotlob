@@ -10,25 +10,29 @@
 
   <body>
     <div class="container fluid">
-      <% if user_signed_in?%>
-          <% @notifications = current_user.notifications.reverse%>
-        <div style="text-align: center;">
-          <span class="h1">Yalla Notlob</span>
-        </div>
-        <div class="btn-group" role="group" aria-label="...">
-          <%= button_to 'Home', "/", method: :get ,class: "btn btn-primary"%>
-          <%= button_to 'Friends', friends_path, method: :get ,class: "btn btn-primary"%>
-          <%= button_to 'Groups', groups_path, method: :get ,class: "btn btn-primary"%>
-          <%= button_to 'Orders', orders_path, method: :get ,class: "btn btn-primary"%>
-        </div>
-        <div class="btn-group" role="group" aria-label="..." id="logout">
-          <%= render "notifications/notification_center", notifications: @notifications %>
-          <%= button_to 'Logout', destroy_user_session_path, method: :delete ,class: "btn btn-default"%>
-        </div>
-      <% end %>
+      <div class="panel panel-default" style="background-color: white; padding: 20px; border-radius: 10px;">
+        <div class="panel-body">
+          <% if user_signed_in?%>
+              <% @notifications = current_user.notifications.reverse%>
+                  <div style="text-align: center;">
+                    <span class="h1">Yalla Notlob</span>
+                  </div>
+                  <div class="btn-group" role="group" aria-label="...">
+                    <%= button_to 'Home', "/", method: :get ,class: "btn btn-primary"%>
+                    <%= button_to 'Friends', friends_path, method: :get ,class: "btn btn-primary"%>
+                    <%= button_to 'Groups', groups_path, method: :get ,class: "btn btn-primary"%>
+                    <%= button_to 'Orders', orders_path, method: :get ,class: "btn btn-primary"%>
+                  </div>
+                  <div class="btn-group" role="group" aria-label="..." id="logout">
+                    <%= render "notifications/notification_center", notifications: @notifications %>
+                    <%= button_to 'Logout', destroy_user_session_path, method: :delete ,class: "btn btn-default"%>
+                  </div>
+          <% end %>
       <!-- <p id="notice"><%= notice %></p> -->
       <!-- <p class="alert"><%= alert %></p> -->
-      <%= yield %>
+          <%= yield %>
+        </div>
+      </div>
     </div>
   </body>
 </html>
