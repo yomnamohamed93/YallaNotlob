@@ -3,8 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 ul.notificator {
   display: inline-block;
-  float:right;
-  margin: 0;
+  float:left;
+  margin: 13px 10px;
+  padding-left: 3px;
   li
   {
     position: relative;
