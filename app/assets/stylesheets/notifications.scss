@@ -71,8 +71,8 @@ ul #notificationList
   width: 0;
   height: 0;
   color: transparent;
-  border: 10px solid black;
-  border-color: transparent transparent white;
+  // border: 10px solid black;
+  // border-color: transparent transparent white;
   margin-top: -20px;
   margin-left: 258px;
 }
@@ -85,7 +85,7 @@ ul #notificationList
   background-color: #f0f0f0;
   position: absolute;
   z-index: 1;
-  width: 284px;
+  width: 100%;
   border-bottom: 1px solid #d44e03;
   color: #d44e03;
 }
