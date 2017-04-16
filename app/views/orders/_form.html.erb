@@ -13,17 +13,18 @@
 <% end %>
 
 <div class="field">
-    <%= f.label :order_type %>
-    <%= f.text_field :order_type %>
+    <%= f.select :order_type, [['Dinner', 'Dinner'], ['Launch', 'Launch'],
+     ['break fast', 'break fast']], prompt: "choose order type " %>
+</div>
+<br>
+<div class="field">
+    <%= f.text_field :resturant_name, :placeholder => 'Enter Restaurant Name' %>
 </div>
 
 <div class="field">
-    <%= f.label :resturant_name %>
-    <%= f.text_field :resturant_name %>
-</div>
-<div class="field">
-    <%= f.label :menu_img %>
-    <%= f.file_field :menu_img %>
+    <label class="btn btn-success btn-file"> Choose Menu image
+      <%= f.file_field :menu_img,style: "display: none;" %>
+    </label>
 </div>
 <div class="field">
     <%=f.input :invited_users do%>
@@ -44,6 +45,6 @@
 <%= f.hidden_field :user_id %>
 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
 </div>
 <% end %>
