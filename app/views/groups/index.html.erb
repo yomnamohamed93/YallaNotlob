@@ -1,75 +1,69 @@
 <p id="notice"><%= notice %></p>
+<div>
+    <%= form_for([@user.groups.build]) do |f| %>
+    <%= f.hidden_field :user_id, value:current_user.id %>
+    <table style="margin:0 auto;">
+        <tr>
+            <td>
+                <h4>New Group:</h4>
+            </td>
+            <td><%= f.text_field :name, placeholder:'Enter group name' %></td>
+            <td>
+                <%= f.submit class: "btn btn-success", value:'Add' %></td>
+        </tr>
+    </table>
 
-<h2>Add Group:</h2>
-<%= form_for([@user.groups.build]) do |f| %>
-<%= f.hidden_field :user_id, value:current_user.id %>
-<table>
-  <tr>
-    <th> <%= f.label :name %></th>
-  </tr>
-  <tr>
-    <td><%= f.text_field :name %></td>
-    <td>  <%= f.submit %></td>
-  </tr>
-</table>
+    <% end %>
+</div>
 
-<% end %>
 <div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="panel panel-default">
-        <div class="panel-heading center">
-          My Groups
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card card-default">
+                <div class="card-header center">
+                    <h4>My Groups</h4>
+                </div>
+                <div class="card-block">
+                    <table class="table table-striped table-bordered">
+                        <tbody>
+                            <% @groups.each do |group| %>
+                            <tr>
+                                <td class='g_name' style="cursor:pointer;">
+                                    <label style="cursor:pointer;" val='<%="#{group.id}"%>'><%="#{group.name }"%></label>
+                                </td>
+                                <td><%= link_to 'Delete', group, method: :delete, data: { confirm: 'Are you sure?' },class: "text-danger" %></td>
+                            </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-          <table  id="g_name" class="table table-striped">
-            <thead>
-              <tr>
-                <th class="center">Name</th>
-                <th class="center" colspan="2">Actions</th>
-              </tr>
-            </thead>
+        <div class="col-sm-8">
+            <div class="card card-default">
+                <div class="card-header center">
+                    <h4>Group Members</h4>
+                </div>
+                <div class="card-block ">
+                    <%= form_tag("/groups/add_member", method: :post, remote: true) do %>
+                    <table style="margin:0 auto;">
+                        <tr>
+                            <td class="h6"><%= label_tag(:friend_email, "Add Friend to group:")%></td>
+                            <td><%= hidden_field_tag :group_id%></td>
+                            <td><%= text_field_tag :friend_email, nil,placeholder:'Enter friend email'%></td>
+                            <td><%= submit_tag :Add, class: "btn btn-success" %></td>
+                        </tr>
+                    </table>
+                    <% end %>
 
-            <tbody>
-              <% @groups.each do |group| %>
-                <tr>
+                    <div >
+                        <ul id="tst"></ul>
+                    </div>
 
-                  <td> <label val='<%="#{group.id}"%>' ><%="#{group.name }"%></label></td>
-                  <td><%= link_to 'Show', group %></td>
-                  <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-    <div class="col-sm-8">
-      <div class="panel panel-default">
-        <div class="panel-heading center">
-        </div>
-        <div class="panel-body">
-          <%= form_tag("/groups/add_member", method: :post, remote: true) do %>
-            <table>
-              <tr>
-                <td><%= label_tag(:friend_email, "Add Friend to group: ")%></td>
-                <td><%= hidden_field_tag :group_id%></td>
-                <td><%= text_field_tag :friend_email%></td>
-                <td><%= submit_tag :Add %></td>
-              </tr>
-            </table>
-          <% end %>
-
-          <div >
-            <ul id="tst">
-
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
 
 </div>
 

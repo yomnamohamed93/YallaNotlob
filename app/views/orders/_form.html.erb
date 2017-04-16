@@ -13,8 +13,9 @@
 <% end %>
 
 <div class="field">
+  <%= f.label :order_type, 'Choose order type:' %>
     <%= f.select :order_type, [['Dinner', 'Dinner'], ['Launch', 'Launch'],
-     ['break fast', 'break fast']], prompt: "choose order type " %>
+     ['break fast', 'break fast']] %>
 </div>
 <br>
 <div class="field">

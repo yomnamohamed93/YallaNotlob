@@ -3,9 +3,13 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 `
 $(function(){
-    $("#g_name").on('click', function(event){
-      clickedLable = $(event.target);
-      clickedLable.css('background-color',"#ccc")
+    $(".g_name").on('click', function(event){
+      if (!$(event.target).is("label")){
+      clickedLable = $($(event.target).children("label")[0]);}
+    else {
+      clickedLable= $(event.target);
+    }
+      //clickedLable.css('background-color',"#ccc")
       G_id = parseInt(clickedLable.attr('val'));
       $("#group_id").val(G_id);
 
