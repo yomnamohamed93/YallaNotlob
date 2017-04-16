@@ -14,11 +14,11 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
-    <div class="panel panel-primary">
-      <div class="panel-body">
-        <div class="center">
-          <span class="h4">Friends</span>
-        </div>
+    <div class="card card-default">
+      <div class="card-header center">
+        <span class="h4">Friends</span>
+      </div>
+      <div class="card-block">
         <div>
           <% @friends.each do |friend| %>
           <div class="d-inline-block">
@@ -37,11 +37,11 @@
     </div>
     </div>
     <div class="col-sm-6">
-      <div class="panel panel-primary">
-        <div class="panel-body">
-          <div class="center">
-            <span class="h4">Friend Requests</span>
-          </div>
+      <div class="card card-default">
+        <div class="card-header center">
+          <span class="h4">Friend Requests</span>
+        </div>
+        <div class="card-block">
           <div>
                 <% @requests.each do |friend| %>
             <div class="d-inline-block">

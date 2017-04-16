@@ -4,11 +4,17 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-     @user = current_user
-     @orders = @user.orders.sort
-     @notifications = current_user.notifications.reverse
+    @user = current_user
+    @orders = @user.orders.sort
+    @notifications = current_user.notifications.reverse
+    @activities = []
+    current_user.friends.each do |friend|
+      friend.orders.each do |order|
+        @activities << order
+      end
+    end
+    @activities.sort_by!(&:created_at).reverse!
   end
-
   # GET /users/1
   # GET /users/1.json
   def show
