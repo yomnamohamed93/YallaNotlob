@@ -3,8 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 ul.notificator {
   display: inline-block;
-  float:right;
-  margin: 0;
+  float:left;
+  margin: 13px 10px;
+  padding-left: 3px;
   li
   {
     position: relative;
@@ -58,7 +59,7 @@ ul #notificationList
   top: 70px;
   margin-left: -253px;
   width: 300px;
-  z-index: 0;
+  z-index: 1;
   display: none;
 }
 
@@ -70,8 +71,8 @@ ul #notificationList
   width: 0;
   height: 0;
   color: transparent;
-  border: 10px solid black;
-  border-color: transparent transparent white;
+  // border: 10px solid black;
+  // border-color: transparent transparent white;
   margin-top: -20px;
   margin-left: 258px;
 }
@@ -84,7 +85,7 @@ ul #notificationList
   background-color: #f0f0f0;
   position: absolute;
   z-index: 1;
-  width: 284px;
+  width: 100%;
   border-bottom: 1px solid #d44e03;
   color: #d44e03;
 }
