@@ -18,7 +18,7 @@
       <div class="card-header center">
         <span class="h4">Friends</span>
       </div>
-      <div class="card-block">
+      <div class="card-block scrollable">
         <div>
           <% @friends.each do |friend| %>
           <div class="d-inline-block">
@@ -41,22 +41,21 @@
         <div class="card-header center">
           <span class="h4">Friend Requests</span>
         </div>
-        <div class="card-block">
+        <div class="card-block scrollable">
           <div>
-                <% @requests.each do |friend| %>
-            <div class="d-inline-block">
+              <% @requests.each do |friend| %>
               <div class="d-inline-block">
-                <%= image_tag friend.avatar.url(:thumb),class: "rounded-circle",width:"80px",height:"80px" %>
+                  <div class="d-inline-block">
+                      <%= image_tag friend.avatar.url(:thumb),class: "rounded-circle",width:"80px",height:"80px" %>
+                  </div>
+                  <div class="d-inline-block">
+                      <%= link_to "#{friend.name}", "friends/#{friend.id}/show" %><br>
+                      <%= link_to 'Accept', "/friends/#{friend.id}/accept", method: :put, data: { confirm: 'Are you sure?' } ,class: "text-success"%>
+                      <%= link_to 'Reject', "/friends/#{friend.id}/decline", method: :delete, data: { confirm: 'Are you sure?' },class: "text-danger" %>
+                  </div>
               </div>
-              <div class="d-inline-block">
-                <%= link_to "#{friend.name}", "friends/#{friend.id}/show" %><br>
-                <%= link_to 'Accept', "/friends/#{friend.id}/accept", method: :put, data: { confirm: 'Are you sure?' } ,class: "text-success"%>
-                <%= link_to 'Reject', "/friends/#{friend.id}/decline", method: :delete, data: { confirm: 'Are you sure?' },class: "text-danger" %>
-              </div>
-            </div>
-            <% end %>
+              <% end %>
           </div>
-
         </div>
 
       </div>

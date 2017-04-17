@@ -25,7 +25,7 @@ $(function(){
                       data.forEach(function(entry) {
                       console.log(entry.name);
                     // $("#tst").text(entry.name);
-                      var txt2 = $("<li></li>").text(entry.name);
+                      var txt2 = $('<li class="list-group-item"></li>').text(entry.name);
                       $("#tst").append(txt2);
 
                   });

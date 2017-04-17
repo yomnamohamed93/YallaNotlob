@@ -15,6 +15,11 @@
  */
 @import 'bootstrap';
 
+.scrollable {
+   max-height: 300px;
+   overflow-y: scroll;
+}
+
 body {
     padding-top: 10px;
     // overflow: hidden;
